@@ -17,3 +17,4 @@ spec:
     ports:
     - containerPort: 8080
   restartPolicy: Always
+kubectl port-forward service/reverseproxy 8080:8080 && kubectl port-forward service frontend 8100:8100
