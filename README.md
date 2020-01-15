@@ -16,12 +16,14 @@
   * Build the images: docker-compose -f docker-compose-build.yaml build --parallel
   * Push the images: docker-compose -f docker-compose-build.yaml push
   * Run the container: docker-compose up
+![alt text](screenshots/dockerComposeUp.png)
+![alt text](screenshots/dockerHub.png)
 
 
 ## Create the Kubernetes resource and deploy it to a Kubernetes cluster
 * Used brew for installation. 
 * Followed this getting started guide for installing kops and connecting it to AWS, https://github.com/kubernetes/kops/blob/master/docs/getting_started/aws.md
-* After having this directory as our root udacity-c3-deployment/k8s, we edit the config files and make sure they point to our contianrer images in our dockerHub registeroy. 
+* After having this directory as our root udacity-c3-deployment/k8s, we edit the config files and make sure they point to our container images in our dockerHub registeroy. 
 * Add base64 encoded values in aws-secet.yaml, env-secret.yaml and decode the env-configmap files, before applying the deployments and services.
 * Apply the following commands to lauch deployment nodes:
   * kubectl apply -f backend-feed-deployment.yaml
@@ -33,11 +35,17 @@
   * kubectl apply -f backend-user-service.yaml
   * kubectl apply -f reverseproxy-service.yaml
   * kubectl apply -f frontend-service.yaml
+![alt text](screenshots/clusterCreation.png)
+
 * Use this command to view state of the pods
   * kubectl get pods
+  * ![alt text](screenshots/getPods.png)
+
 * Expose the application through the services, using the following commands:
   * kubectl port-forward service/reverseproxy 8080:8080 
   * kubectl port-forward service/frontend 8100:8100 
+  *![alt text](screenshots/addingPic.png)
+
 
 ## Extend the application with deployments and be able to do rolling-updates and rollbacks
 * Use the following commands for rolloing-updates
@@ -56,11 +64,19 @@
 
 ## Monitoring using aws cloudWatch
 * cloudWatch was configured following this link, https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-metrics.html
+![alt text](screenshots/cloudwatchAgent.png)
 *  A directory in the cloudWatch was created for the deployed cluster where the logs will be avalaible. 
+![alt text](screenshots/logGroups.png)
+
 
 ## Automatic continuous integration and continuous delivery.
-* Create a travis account using you gitub account.
+* Create a travis account using your gitub account.
 * Link travis to the project repositroy.
 * Add a .travis.yaml file in the root directory of the project. 
 * Trigger a build from travis dashboard for the current project repo. 
+![alt text](screenshots/buildStarted.png)
+![alt text](screenshots/travisBuild.png)
+![alt text](screenshots/travisFinish.png)
+
+
 
